@@ -1,0 +1,16 @@
+# PLACEHOLDER — no partner-validated procedure text has been supplied yet.
+#
+# This file is intentionally empty of authoritative content. Per the project
+# brief, the backend must never invent official reporting procedures on its
+# own. Once your team has partner-validated text (e.g. the exact steps for
+# using an official cyber-fraud reporting channel), replace this file's
+# contents with that text — one instruction per line, or freeform, either
+# is fine since action_generator.py treats a non-empty file as raw
+# authoritative text and includes it verbatim in the response.
+#
+# Until this file has real content, action_generator.py falls back to a
+# short list of generic, non-authoritative safety steps (don't click links,
+# don't share OTP/PIN/passwords, contact your bank/service through its own
+# official app or website) and a generic "information to prepare" checklist.
+# It does not fabricate specific helpline numbers, case-filing steps, or
+# procedural claims.

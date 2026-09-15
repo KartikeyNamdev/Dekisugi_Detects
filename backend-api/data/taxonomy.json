@@ -1,0 +1,223 @@
+{
+  "note": "All examples below are synthetic and redacted. No real names, phone numbers, account numbers, OTPs, or addresses are used. Placeholder tokens like [NUMBER], [LINK], [NAME], [BANK] stand in for real values.",
+  "scam_examples": [
+    {
+      "id": "scam_kyc_01",
+      "category": "KYC Scam",
+      "text": "Dear customer, your KYC has expired and your account will be suspended within 24 hours. Click [LINK] immediately to update your KYC and avoid suspension.",
+      "indicators": ["urgency", "unofficial_link", "fake_authority"]
+    },
+    {
+      "id": "scam_kyc_02",
+      "category": "KYC Scam",
+      "text": "URGENT: Your [BANK] KYC is incomplete. Share your OTP sent to your registered mobile now to reactivate your account or it will be blocked permanently.",
+      "indicators": ["urgency", "otp_request", "impersonation"]
+    },
+    {
+      "id": "scam_loan_01",
+      "category": "Loan-app harassment",
+      "text": "This is a final notice from [APP] Loans. You have defaulted. Pay [NUMBER] immediately via [LINK] or we will contact everyone in your phone contacts and inform your employer.",
+      "indicators": ["threat_intimidation", "urgency", "payment_request"]
+    },
+    {
+      "id": "scam_loan_02",
+      "category": "Loan-app harassment",
+      "text": "We have shared your photo with your contacts as a defaulter. Pay the pending amount now through [LINK] to stop further action.",
+      "indicators": ["threat_intimidation", "payment_request", "unofficial_link"]
+    },
+    {
+      "id": "scam_courier_01",
+      "category": "Courier/customs fee scam",
+      "text": "Your parcel is held at customs due to unpaid duty of [NUMBER]. Pay now via [LINK] within 2 hours or the parcel will be returned.",
+      "indicators": ["urgency", "payment_request", "advance_fee", "unofficial_link"]
+    },
+    {
+      "id": "scam_courier_02",
+      "category": "Courier/customs fee scam",
+      "text": "Delivery failed due to incomplete address. A re-delivery fee of [NUMBER] is required. Pay here: [LINK]",
+      "indicators": ["advance_fee", "unofficial_link", "urgency"]
+    },
+    {
+      "id": "scam_invest_01",
+      "category": "Investment/trading scam",
+      "text": "Join our exclusive trading group. Members are earning 30% guaranteed monthly returns. Limited slots left, deposit now via [LINK] to start.",
+      "indicators": ["unrealistic_profit", "urgency", "unofficial_link"]
+    },
+    {
+      "id": "scam_invest_02",
+      "category": "Investment/trading scam",
+      "text": "Our AI trading bot doubled [NAME]'s investment in 10 days. Send [NUMBER] to this account to begin, guaranteed profit, no risk.",
+      "indicators": ["unrealistic_profit", "payment_request"]
+    },
+    {
+      "id": "scam_digital_arrest_01",
+      "category": "Digital arrest scam",
+      "text": "This is [NAME], Cyber Crime officer. A case has been registered against your Aadhaar number for money laundering. Stay on this video call and do not disconnect or you will be arrested immediately.",
+      "indicators": ["fake_authority", "threat_intimidation", "urgency"]
+    },
+    {
+      "id": "scam_digital_arrest_02",
+      "category": "Digital arrest scam",
+      "text": "Your bank account is linked to a narcotics case. To avoid arrest, transfer funds to this RBI verification account for a safety check within 1 hour.",
+      "indicators": ["fake_authority", "threat_intimidation", "payment_request", "urgency"]
+    },
+    {
+      "id": "scam_job_01",
+      "category": "Job registration/fee scam",
+      "text": "Congratulations, you are shortlisted for a work-from-home data entry job paying [NUMBER]/month. Pay a one-time registration fee of [NUMBER] to confirm your seat.",
+      "indicators": ["job_fee", "advance_fee", "urgency"]
+    },
+    {
+      "id": "scam_job_02",
+      "category": "Job registration/fee scam",
+      "text": "HR Team: Your interview is confirmed. Please pay a refundable security deposit of [NUMBER] via [LINK] to receive your offer letter today.",
+      "indicators": ["job_fee", "advance_fee", "unofficial_link"]
+    },
+    {
+      "id": "scam_utility_01",
+      "category": "Electricity/utility disconnection scam",
+      "text": "Dear consumer, your electricity will be disconnected tonight at 9:30 PM due to unpaid bill. Contact our officer immediately on [NUMBER] or update payment via [LINK].",
+      "indicators": ["urgency", "unofficial_link", "fake_authority"]
+    },
+    {
+      "id": "scam_utility_02",
+      "category": "Electricity/utility disconnection scam",
+      "text": "Your last month bill was not updated due to a technical fault. Download our app [LINK] and install it to avoid disconnection and get your bill corrected.",
+      "indicators": ["pressure_to_install_app", "urgency", "suspicious_app"]
+    },
+    {
+      "id": "scam_bank_impersonation_01",
+      "category": "Bank impersonation",
+      "text": "This is [BANK] Security Dept. We noticed a suspicious login. Share the OTP sent to your number to block the unauthorized transaction immediately.",
+      "indicators": ["impersonation", "otp_request", "urgency"]
+    },
+    {
+      "id": "scam_bank_impersonation_02",
+      "category": "Bank impersonation",
+      "text": "Your debit card will be blocked today. Click [LINK] to verify your card number, expiry, and CVV to keep it active.",
+      "indicators": ["impersonation", "credential_request", "unofficial_link", "urgency"]
+    },
+    {
+      "id": "scam_remote_access_01",
+      "category": "Bank impersonation",
+      "text": "To resolve your failed transaction, please install [APP] remote support app and share the access code so our technician can fix it from our end.",
+      "indicators": ["remote_access_request", "suspicious_app", "impersonation"]
+    },
+    {
+      "id": "scam_prize_01",
+      "category": "Investment/trading scam",
+      "text": "You have won [NUMBER] in the [BRAND] lucky draw. Pay a processing fee of [NUMBER] to [LINK] to claim your prize within 24 hours.",
+      "indicators": ["unrealistic_profit", "advance_fee", "urgency", "unofficial_link"]
+    }
+  ],
+  "genuine_examples": [
+    {
+      "id": "genuine_bank_01",
+      "category": "Bank communication",
+      "text": "Dear customer, a debit of [NUMBER] was made on your [BANK] account ending [NUMBER] on [DATE] at [MERCHANT]. If this wasn't you, call the number on the back of your card.",
+      "why_legitimate": "Standard transaction alert with no link, no OTP request, no urgency beyond a normal fraud-reporting instruction pointing to the card itself rather than an unofficial channel."
+    },
+    {
+      "id": "genuine_bank_02",
+      "category": "Bank communication",
+      "text": "Your [BANK] statement for [MONTH] is ready. Log in to the [BANK] mobile app or netbanking portal to view it.",
+      "why_legitimate": "Routine notification directing the user to the bank's own app/portal, not an external link."
+    },
+    {
+      "id": "genuine_bank_03",
+      "category": "Account notification",
+      "text": "Your account balance is below [NUMBER]. Maintain minimum balance to avoid a charge next cycle.",
+      "why_legitimate": "Informational, no request for credentials, OTP, or payment via a third-party link."
+    },
+    {
+      "id": "genuine_utility_01",
+      "category": "Utility bill",
+      "text": "Your electricity bill of [NUMBER] for [MONTH] is generated. Due date is [DATE]. Pay via the official [PROVIDER] app or website.",
+      "why_legitimate": "References the provider's own official app/website rather than an unfamiliar link, and gives a normal due date rather than an artificial countdown."
+    },
+    {
+      "id": "genuine_utility_02",
+      "category": "Utility bill",
+      "text": "Reminder: your water bill payment of [NUMBER] is due on [DATE]. No action needed if already paid.",
+      "why_legitimate": "Plain reminder, explicitly says no action needed if already paid, no threat of same-day disconnection."
+    },
+    {
+      "id": "genuine_courier_01",
+      "category": "Courier update",
+      "text": "Your order #[NUMBER] has been shipped and is expected to arrive by [DATE]. Track it in the [COURIER] app.",
+      "why_legitimate": "Standard shipping update pointing to the courier's own app, no fee requested."
+    },
+    {
+      "id": "genuine_courier_02",
+      "category": "Courier update",
+      "text": "Delivery attempted for order #[NUMBER] but no one was available. It will be re-attempted tomorrow between 10am-6pm.",
+      "why_legitimate": "No payment request, no link, just a scheduling update."
+    },
+    {
+      "id": "genuine_txn_01",
+      "category": "Transaction notification",
+      "text": "[NUMBER] credited to your [BANK] account ending [NUMBER] via UPI from [NAME] on [DATE].",
+      "why_legitimate": "A credit notification, not a request for the user to do anything; scams almost always ask for action, this doesn't."
+    },
+    {
+      "id": "genuine_txn_02",
+      "category": "Transaction notification",
+      "text": "You have successfully paid [NUMBER] to [MERCHANT] via UPI. Reference ID [NUMBER].",
+      "why_legitimate": "Confirmation of a payment the user already initiated, standard reference ID, no follow-up action requested."
+    },
+    {
+      "id": "genuine_account_alert_01",
+      "category": "Account alert",
+      "text": "Your [BANK] credit card statement is generated. Total due: [NUMBER]. Minimum due: [NUMBER]. Due date [DATE]. Pay via netbanking, UPI autopay, or the [BANK] app.",
+      "why_legitimate": "Lists the bank's own official payment channels rather than a single unfamiliar link, standard statement cadence."
+    },
+    {
+      "id": "genuine_account_alert_02",
+      "category": "Account alert",
+      "text": "Your fixed deposit of [NUMBER] matures on [DATE]. It will be auto-renewed unless you visit your branch or use netbanking to change instructions.",
+      "why_legitimate": "Informational with a standard official channel for changes, no urgency or threat."
+    },
+    {
+      "id": "genuine_kyc_01",
+      "category": "KYC/account alert",
+      "text": "As per RBI guidelines, please complete your periodic KYC update by visiting your nearest [BANK] branch or through the official [BANK] mobile app before [DATE].",
+      "why_legitimate": "References an official process with a reasonable deadline and official channels (branch/own app), not a same-day threat or unfamiliar link."
+    },
+    {
+      "id": "genuine_kyc_02",
+      "category": "KYC/account alert",
+      "text": "Your KYC update request has been received and is under process. It may take 5-7 working days.",
+      "why_legitimate": "Purely informational status update, no request for action or sensitive data."
+    },
+    {
+      "id": "genuine_otp_context_01",
+      "category": "Transaction notification",
+      "text": "OTP for your transaction of [NUMBER] at [MERCHANT] is [NUMBER]. Valid for 10 minutes. Do not share this OTP with anyone.",
+      "why_legitimate": "This is the bank delivering an OTP to the user for a transaction the user initiated, and explicitly warns not to share it — the opposite pattern of a scam asking the user to share an OTP."
+    },
+    {
+      "id": "genuine_insurance_01",
+      "category": "Account notification",
+      "text": "Your health insurance premium of [NUMBER] is due on [DATE]. Pay through the official [INSURER] app, website, or your agent.",
+      "why_legitimate": "Standard premium reminder with legitimate official channels listed, reasonable due date."
+    },
+    {
+      "id": "genuine_app_update_01",
+      "category": "Account notification",
+      "text": "[BANK] app has been updated with new security features. Update to the latest version from the Play Store or App Store for a better experience.",
+      "why_legitimate": "Points to the official app stores rather than a direct APK/side-load link, no urgency."
+    },
+    {
+      "id": "genuine_delivery_otp_01",
+      "category": "Courier update",
+      "text": "Your delivery OTP for order #[NUMBER] is [NUMBER]. Share this with the delivery agent only at the time of delivery to confirm receipt.",
+      "why_legitimate": "A delivery-confirmation OTP shared in a specific, limited, expected context (at the door, with the delivery agent) rather than being solicited remotely by someone claiming to be an official."
+    },
+    {
+      "id": "genuine_loan_emi_01",
+      "category": "Bank communication",
+      "text": "Your EMI of [NUMBER] for loan account ending [NUMBER] is due on [DATE]. Ensure sufficient balance to avoid a bounce charge.",
+      "why_legitimate": "Routine EMI reminder from an existing, known loan relationship, no threats or contact-list references."
+    }
+  ]
+}

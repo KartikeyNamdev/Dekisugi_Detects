@@ -1,0 +1,19 @@
+{
+  "_warning": "PLACEHOLDER DATA — NOT a real extract of RBI's regulated-entity list. Replace with the actual list your team is authorized to redistribute before using this for anything beyond a hackathon demo. Entries below are fictional examples used only to exercise the lookup code path.",
+  "source": "RBI regulated entity app list (PLACEHOLDER — replace before production use)",
+  "last_updated": null,
+  "apps": [
+    {
+      "name": "Example Bank Personal Loans",
+      "aliases": ["Example Bank Loans", "ExampleBank Loans App"]
+    },
+    {
+      "name": "SampleFin Credit",
+      "aliases": ["Samplefin", "SampleFin App"]
+    },
+    {
+      "name": "DemoNBFC Instant Loan",
+      "aliases": ["DemoNBFC", "Demo NBFC Loan App"]
+    }
+  ]
+}
