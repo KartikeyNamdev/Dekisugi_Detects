@@ -40,16 +40,24 @@ services:
         value: "*" # tighten to your actual Vercel URL once you have it
 
   # Redis job consumer — pulls from fraud:jobs, calls Claude, publishes the
-  # result back. Not web-facing; see /CONTRACT.md and
-  # backend-api/app/redis_worker.py.
-  - type: worker
+  # result back. See /CONTRACT.md and backend-api/app/redis_worker.py.
+  #
+  # This is `type: web`, not `type: worker` — Render's free/Hobby plan
+  # doesn't support the Background Worker service type via Blueprint at
+  # all ("service type is not available for this plan"), regardless of
+  # config here. app/worker_service.py runs the identical redis_worker
+  # consumer loop in a background thread alongside a trivial /health
+  # endpoint, purely so this plan tier accepts it. Not meant to receive
+  # real traffic; nothing else talks to it over HTTP.
+  - type: web
     name: dekisugi-worker
     runtime: docker
     dockerfilePath: ./backend-api/Dockerfile
     dockerContext: ./backend-api
-    dockerCommand: python -m app.redis_worker
+    dockerCommand: python -m app.worker_service
     region: singapore
     plan: free
+    healthCheckPath: /health
     envVars:
       - key: REDIS_URL
         fromService:
