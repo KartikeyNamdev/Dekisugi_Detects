@@ -14,9 +14,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@types/axios": "^0.9.36",
     "@types/express": "^5.0.6",
-    "axios": "^1.20.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -28,6 +26,7 @@
     "@types/cors": "^2.8.19",
     "@types/multer": "^2.2.0",
     "@types/node": "^26.5.1",
-    "tsx": "^4.23.13"
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
   }
 }

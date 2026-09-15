@@ -1,0 +1,15 @@
+# Applies to builds using the repo root as context (currently: backend/Dockerfile,
+# via docker-compose.yml and render.yaml). Keeps the build context upload small —
+# each Dockerfile still COPYs in only the specific paths it actually needs.
+.git
+**/node_modules
+**/.next
+**/dist
+**/__pycache__
+**/venv
+**/.venv
+**/.pytest_cache
+**/*.tsbuildinfo
+**/.env
+frontend
+backend-api
