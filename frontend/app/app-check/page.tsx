@@ -27,7 +27,7 @@ export default function AppCheckPage() {
   }
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Check a lending app</h1>
       <p className="subtitle">
         Check whether an app name appears on the Reserve Bank of India&apos;s

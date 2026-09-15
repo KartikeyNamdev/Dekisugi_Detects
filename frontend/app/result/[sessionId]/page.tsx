@@ -44,7 +44,7 @@ export default function ResultPage({
   const { sessionId } = use(params);
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Result</h1>
       <ResultView key={sessionId} sessionId={sessionId} />
       <p style={{ marginTop: "1.5rem" }}>

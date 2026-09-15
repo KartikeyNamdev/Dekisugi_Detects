@@ -44,7 +44,7 @@ export default function ScreenshotPage() {
   }
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Upload a screenshot</h1>
       <p className="subtitle">
         Drag in or choose a screenshot of a message, app, or notification.

@@ -25,7 +25,7 @@ export default function MessagePage() {
   }
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Paste a message</h1>
       <p className="subtitle">
         Paste a forwarded SMS, WhatsApp, or email message exactly as you

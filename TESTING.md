@@ -29,19 +29,20 @@ Skip to [Test cases to paste](#test-cases-to-paste) if you just want to try it.
    instead), speak a description, click **Stop recording**, then submit.
    Audio never leaves your device — only the transcribed text is sent.
 5. **/app-check** — type an app name, submit. This one is instant (no Claude
-   call, just a local list lookup) — see the known limitation below.
+   call, just a local list lookup) against RBI's real Digital Lending Apps
+   directory (704 apps) — try "CASHe" or "Bajaj Markets" for a match.
 
 On the result page you should see: a colored verdict badge, confidence %,
 a summary sentence, a list of specific indicators, a "next 10 minutes"
 action list, and a reporting script block.
 
-### Known limitation to expect while testing
+### Refreshing the RBI data before a real deployment
 
-The RBI regulated-lending-app list is placeholder/sample data on both
-sides (`data/rbi-regulated-lending-apps.json` used by `/app-check`, and
-`backend-api/data/rbi_apps.json` used inside the full analysis flow) — real
-app names will come back "not found," and the two lists aren't the same
-list yet. This is flagged in `CONTRACT.md` §2 as a pre-demo TODO, not a bug.
+The RBI lending-app list is real data now (not placeholder), but RBI's
+site can't be scraped automatically — see `/CONTRACT.md` §4 for how to
+re-export it by hand and regenerate `data/rbi-regulated-lending-apps.json`
++ `backend-api/data/rbi_apps.json` via `scripts/build_rbi_lists.py` when
+it's time to refresh before a real deployment.
 
 ---
 
@@ -102,14 +103,15 @@ genuine institutional communication.
 
 ### App check
 
-Paste any of these into **/app-check** — since the RBI list is placeholder
-data (see limitation above), every real name will currently say "not
-found," which is the expected/correct behavior for an unlisted app (not a
-bug):
+Paste these into **/app-check** against the real RBI list:
 ```
-QuickCash Loans
 CASHe
+Bajaj Markets
+Some Totally Fake App Name
 ```
+The first two should come back matched; the third should not — that's the
+expected/correct behavior for an app that isn't in RBI's directory (not a
+bug, and not proof the app is fraudulent — the UI says so).
 
 ---
 
@@ -141,7 +143,7 @@ curl -s -X POST localhost:3000/api/analyze \
   -F "callDescription=Someone claiming to be from the police said I'm under digital arrest."
 
 # App lending-list check (instant, synchronous)
-curl -s "localhost:3000/api/lending-check?appName=QuickCash%20Loans"
+curl -s "localhost:3000/api/lending-check?appName=CASHe"
 ```
 
 ### Watching the worker's logs

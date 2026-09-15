@@ -74,7 +74,7 @@ export default function CallPage() {
   }
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Describe a call</h1>
       <p className="subtitle">
         Type or speak what happened on the call — who called, what they
