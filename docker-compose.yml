@@ -1,0 +1,73 @@
+# Note: the host's own Redis (if you have one running locally, e.g. via
+# `brew services`) is left alone on its usual 6379 — this project's Redis
+# is only exposed on the host as 6380 to avoid any collision. Containers
+# still talk to each other over the internal network as redis:6379.
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      REDIS_URL: redis://redis:6379
+      SESSION_TTL_SECONDS: 300
+      RESULT_TTL_SECONDS: 120
+      RESULT_WAIT_TIMEOUT_MS: 25000
+      MAX_UPLOAD_BYTES: 8388608
+      CORS_ORIGIN: "*"
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # Redis job consumer — pulls from fraud:jobs, calls Claude, publishes the
+  # result back. See /CONTRACT.md and backend-api/app/redis_worker.py.
+  worker:
+    build:
+      context: ./backend-api
+    command: ["python", "-m", "app.redis_worker"]
+    environment:
+      REDIS_URL: redis://redis:6379
+      RESULT_TTL_SECONDS: 120
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-sonnet-5}
+      CLAUDE_TIMEOUT_SECONDS: 25
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3000"
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:3000
+    depends_on:
+      - backend
+
+  # Optional: the worker's standalone HTTP endpoint (POST /analyze), for
+  # testing backend-api directly without going through Redis/the Node
+  # backend. Not part of the main request path.
+  # worker-api:
+  #   build:
+  #     context: ./backend-api
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+  #     CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-sonnet-5}
+  #     CLAUDE_TIMEOUT_SECONDS: 25
+  #     ALLOWED_ORIGINS: "*"
