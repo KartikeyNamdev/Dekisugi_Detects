@@ -197,14 +197,15 @@ See `app/models.py` for the authoritative Pydantic definitions. Key enums:
 
 ---
 
-## 6. ⚠️ RBI app list is placeholder data — read before demoing
+## 6. RBI app list — real data, refresh it before a stale demo
 
-`data/rbi_apps.json` ships with a small set of **clearly synthetic, made-up
-entries** so the lookup code path works end-to-end in a demo. It is **not**
-a real extract of the RBI's regulated-entity list. Before relying on this
-feature for anything beyond a hackathon demo, replace the file with the
-actual list your team has permission to redistribute, sourced directly from
-RBI/official channels.
+`data/rbi_apps.json` is generated from a real export of RBI's public
+Digital Lending Apps (DLA) directory (1,234 entity/app records as of the
+`last_updated` date inside the file) via `scripts/build_rbi_lists.py` at
+the repo root — see `/CONTRACT.md` §4 for exactly how to re-export and
+regenerate it, since RBI's site can't be scraped automatically (it blocks
+non-browser requests) and needs a human to re-download the `.xlsx` by hand
+periodically.
 
 The API itself is designed to never overclaim: if an app isn't found in the
 local file, the response is `"NOT_FOUND"` (not `false`), and the app never
