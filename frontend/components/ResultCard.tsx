@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { FraudResult } from "@/lib/types";
 
 const VERDICT_LABEL: Record<FraudResult["verdict"], string> = {
@@ -13,24 +14,40 @@ const VERDICT_CLASS: Record<FraudResult["verdict"], string> = {
 };
 
 export default function ResultCard({ result }: { result: FraudResult }) {
+  const confidencePct = Math.round(result.confidence * 100);
+
   return (
-    <div className="card">
-      <div className={VERDICT_CLASS[result.verdict]}>
-        {VERDICT_LABEL[result.verdict]}
-        <span className="confidence">
-          {" "}
-          ({Math.round(result.confidence * 100)}% confidence)
-        </span>
+    <div className="card card-result">
+      <div className={VERDICT_CLASS[result.verdict]}>{VERDICT_LABEL[result.verdict]}</div>
+
+      <div className="confidence-row">
+        <span className="confidence-label">{confidencePct}% confidence</span>
+        <div className="confidence-meter">
+          <div
+            className="confidence-meter-fill"
+            style={{ width: `${confidencePct}%` }}
+          />
+        </div>
       </div>
 
       <p>{result.summary}</p>
 
+      {result.verdict === "likely_scam" && (
+        <Link href="/report" className="result-emergency-link">
+          🚨 Already sent money because of this? Get help now →
+        </Link>
+      )}
+
       {result.indicators.length > 0 && (
         <section>
           <h3>Indicators found</h3>
-          <ul>
-            {result.indicators.map((indicator) => (
-              <li key={indicator.label}>
+          <ul className="indicator-list">
+            {result.indicators.map((indicator, i) => (
+              <li
+                key={indicator.label}
+                className="indicator-item"
+                style={{ animationDelay: `${i * 90}ms` }}
+              >
                 <strong>{indicator.label}</strong> — {indicator.detail}
               </li>
             ))}

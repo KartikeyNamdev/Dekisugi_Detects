@@ -149,6 +149,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Already a victim */}
+      <section className="section">
+        <div className="section-inner">
+          <Reveal>
+            <div className="victim-band">
+              <div className="victim-band-text">
+                <span className="eyebrow eyebrow-urgent">Already sent money?</span>
+                <h2>If you&apos;ve already been scammed, don&apos;t wait</h2>
+                <p>
+                  Every hour matters for getting a transfer held or reversed.
+                  Call 1930, file at cybercrime.gov.in, and see the full
+                  next-step checklist.
+                </p>
+              </div>
+              <Link href="/report" className="btn-lg victim-band-cta">
+                Get help now →
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="section">
         <div className="section-inner">

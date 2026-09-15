@@ -114,26 +114,96 @@ a {
 
 .nav {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
   flex-wrap: wrap;
 }
 
 .nav-link {
+  position: relative;
   text-decoration: none;
   color: var(--muted);
   font-size: 0.92rem;
   font-weight: 500;
   transition: color 0.15s ease;
+  padding-bottom: 0.2rem;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--brand);
+  transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link:hover {
   color: var(--brand);
 }
 
+.nav-link:hover::after {
+  right: 0;
+}
+
+.nav-link-active {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.nav-link-active::after {
+  right: 0;
+}
+
+.nav-report {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--scam);
+  background: color-mix(in srgb, var(--scam) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--scam) 30%, transparent);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.nav-report:hover {
+  background: color-mix(in srgb, var(--scam) 18%, transparent);
+  transform: translateY(-1px);
+}
+
+.nav-report-active {
+  background: var(--scam);
+  color: #fff;
+}
+
 .site-main {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.page-transition {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.18s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-transition-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .page-container {
@@ -280,6 +350,11 @@ button:hover:not(:disabled) {
   border-color: var(--brand-dark);
   transform: translateY(-1px);
   box-shadow: 0 10px 22px -10px hsl(var(--shadow-color) / 0.55);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
 }
 
 button:disabled {
@@ -580,6 +655,12 @@ a.btn-lg:hover,
   box-shadow: 0 12px 26px -12px hsl(var(--shadow-color) / 0.55);
 }
 
+a.btn-lg:active,
+.btn-lg:active:not(:disabled) {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
 a.btn-lg.secondary {
   background: transparent;
   color: var(--brand);
@@ -839,6 +920,47 @@ a.btn-lg.secondary:hover {
   color: var(--brand-dark);
 }
 
+/* --- Already-a-victim band --- */
+
+.eyebrow-urgent {
+  color: var(--scam);
+  background: color-mix(in srgb, var(--scam) 12%, transparent);
+}
+
+.victim-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--scam) 30%, var(--border));
+  border-radius: 24px;
+  padding: 2.25rem 2rem;
+}
+
+.victim-band-text h2 {
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  margin: 0 0 0.5rem;
+}
+
+.victim-band-text p {
+  color: var(--muted);
+  margin: 0;
+  max-width: 520px;
+}
+
+.victim-band-cta {
+  background: var(--scam);
+  border-color: var(--scam);
+  flex-shrink: 0;
+}
+
+.victim-band-cta:hover {
+  background: color-mix(in srgb, var(--scam) 85%, black);
+  border-color: color-mix(in srgb, var(--scam) 85%, black);
+}
+
 /* --- Scroll reveal --- */
 
 .reveal {
@@ -851,6 +973,244 @@ a.btn-lg.secondary:hover {
 .reveal-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* ================================================================
+   Result card animation
+   ================================================================ */
+
+.card-result {
+  animation: card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.verdict {
+  animation: verdict-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 0.1s;
+}
+
+@keyframes verdict-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.confidence-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.confidence-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.confidence-meter {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+  overflow: hidden;
+}
+
+.confidence-meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: confidence-fill 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.3s;
+}
+
+@keyframes confidence-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.indicator-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.indicator-item {
+  padding: 0.55rem 0.8rem;
+  border-left: 3px solid var(--brand);
+  background: color-mix(in srgb, var(--brand) 6%, transparent);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92rem;
+  opacity: 0;
+  animation: indicator-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes indicator-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.result-emergency-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--scam);
+  background: color-mix(in srgb, var(--scam) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--scam) 30%, transparent);
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  margin: 0.25rem 0 1rem;
+  transition: background 0.15s ease;
+}
+
+.result-emergency-link:hover {
+  background: color-mix(in srgb, var(--scam) 18%, transparent);
+}
+
+/* ================================================================
+   Report / already-scammed page
+   ================================================================ */
+
+.report-page h1 {
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+}
+
+.emergency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--scam);
+  background: color-mix(in srgb, var(--scam) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--scam) 30%, transparent);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--scam) 30%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+.emergency-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.emergency-action {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.emergency-action:hover {
+  transform: translateY(-3px);
+}
+
+.emergency-action-primary {
+  background: var(--scam);
+  color: #fff;
+  box-shadow: 0 14px 28px -14px color-mix(in srgb, var(--scam) 60%, transparent);
+}
+
+.emergency-action-secondary {
+  background: var(--surface);
+  color: var(--foreground);
+  border: 1px solid color-mix(in srgb, var(--scam) 30%, var(--border));
+}
+
+.emergency-action-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.emergency-action-title {
+  display: block;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.emergency-action-desc {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.report-section {
+  margin-top: 2rem;
+}
+
+.report-section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.report-section-warning h2 {
+  color: var(--scam);
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 1.4rem;
+}
+
+.checklist li {
+  line-height: 1.55;
+}
+
+.checklist-warning li::marker {
+  color: var(--scam);
+}
+
+.report-footnote {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -867,5 +1227,17 @@ a.btn-lg.secondary:hover {
   }
   .hero-scroll-cue {
     display: none;
+  }
+  .card-result,
+  .verdict,
+  .confidence-meter-fill,
+  .indicator-item,
+  .emergency-badge {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .page-transition {
+    transition: none;
   }
 }

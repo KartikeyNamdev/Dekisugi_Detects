@@ -4,6 +4,7 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
+import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,16 +34,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </Link>
           <Nav />
         </header>
-        <main className="site-main">{children}</main>
+        <main className="site-main">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <footer className="site-footer">
           <p>
             Dekisugi Detects is an advisory tool — it doesn&apos;t report on
             your behalf or contact your bank. If money has already moved,
-            call <strong>1930</strong> or visit{" "}
+            call <a href="tel:1930">1930</a> or visit{" "}
             <a href="https://cybercrime.gov.in" target="_blank" rel="noreferrer">
               cybercrime.gov.in
             </a>{" "}
-            immediately.
+            immediately —{" "}
+            <Link href="/report">see the full checklist →</Link>
           </p>
         </footer>
       </body>
